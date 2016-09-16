@@ -31,6 +31,10 @@ class Board
     self.place_bombs(self.empty_grid)
   end
 
+  def self.generate_numbers(grid)
+    
+  end
+
   def initialize(grid)
     @grid = grid
   end
