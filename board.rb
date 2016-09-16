@@ -6,7 +6,7 @@ class Board
   attr_reader :grid
 
   def self.empty_grid
-    Array.new(8) {Array.new(8) { Tile.new() }}
+    Array.new(9) {Array.new(9) { Tile.new() }}
   end
 
   def self.place_bomb?
@@ -36,11 +36,12 @@ class Board
   end
 
   def render
-    puts "(0..8).to_a.join(" ")"
+    puts "  " + (0..8).to_a.join(" ")
     @grid.each_with_index do |row, i|
       puts "#{i} #{row.join(" ")}"
     end
   end
+
 
   def [](pos)
     x,y = pos
@@ -58,7 +59,7 @@ class Board
   end
 
   def update_board(pos)
-    debugger
+    #debugger
     self[pos].reveal
   end
 
@@ -78,10 +79,10 @@ class Board
   end
   ## in progress
   def reveal_adjacents(pos)
-    adjacent_blanks = adjacents(pos).select {|o_tile| o_tile.value == 0}
+    adjacent_blanks = adjacents(pos).select {|o_tile| o_tile.value == 0 && !o.tile.revealed}
     adjacent_blanks.each do |tile|
       adjacent_blanks << adjacents(tile).select {|tile| tile.value == 0}
-      @grid[pos].reveal
+      @grid[pos].reveal if !@grid[pos].reveal
     end
 
   end

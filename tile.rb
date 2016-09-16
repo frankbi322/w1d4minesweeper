@@ -16,6 +16,16 @@ attr_reader :value, :revealed
     @value
   end
 
-
+  def to_s
+    if self.revealed
+      if self.bomb
+        "B"
+      else
+        @value.to_s
+      end
+    else
+      "*"
+    end
+  end
 
 end
